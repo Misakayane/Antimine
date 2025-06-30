@@ -21,7 +21,7 @@ jobs:
           bash ./gdx/check_import.sh ./gdx/build.gradle.kts
         shell: bash
 
-ktlint:
+  ktlint:
     name: KtLint Auto-format
     runs-on: ubuntu-latest
     steps:
