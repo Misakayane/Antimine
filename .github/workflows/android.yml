@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   libgdx:
@@ -56,19 +55,18 @@ jobs:
   fdroid:
     name: F-droid build
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
 
     steps:
-      - name: Clone PR
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - name: Setup JDK 17
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-      - name: Build for F-Droid
-        run: |
-          ./gradlew assembleFossDebug
-
-    if: workflow_dispatch
+     - name: Clone PR
+       uses: actions/checkout@v2
+       with:
+         fetch-depth: 1
+     - name: Setup JDK 17
+       uses: actions/setup-java@v2
+       with:
+         distribution: 'zulu'
+         java-version: '17'
+     - name: Build for F-Droid
+       run: |
+         ./gradlew assembleFossDebug
